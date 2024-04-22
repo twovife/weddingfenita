@@ -4,11 +4,17 @@ import React from "react";
 interface CoverProps {
   hideCover: any;
   setHideCover: any;
+  setIsPlaying: any;
 }
 
-const Cover: React.FC<CoverProps> = ({ hideCover, setHideCover }) => {
+const Cover: React.FC<CoverProps> = ({
+  hideCover,
+  setHideCover,
+  setIsPlaying,
+}) => {
   const handleOpenCover = () => {
     setHideCover(!hideCover);
+    setIsPlaying(true);
   };
   return (
     <div

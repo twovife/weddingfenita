@@ -10,6 +10,33 @@ import Galery from "./Galery";
 import Image from "next/image";
 import Templates from "./Templates";
 
+import { motion } from "framer-motion";
+
+const container = {
+  hide: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.6,
+    },
+  },
+};
+
+const childAnimated = {
+  hide: { y: 100, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+      stiffness: 100,
+      damping: 25,
+    },
+  },
+};
+
 const WeedingGift = () => {
   const [copied, setCopied] = useState(false);
   const handleClick = async (params: any) => {
@@ -30,40 +57,43 @@ const WeedingGift = () => {
   };
   return (
     <Templates>
-      <div className="p-6">
+      <motion.div
+        variants={container}
+        initial="hide"
+        whileInView="show"
+        className="p-6"
+      >
         <div className="w-full bg-gradient-to-b from-white/50 to-main relative z-30 rounded">
           <div className="py-6 pb-0">
             <Galery />
           </div>
           <div className="w-full flex items-center justify-center flex-col py-6 pb-0">
-            <Image
-              alt="image"
-              src={Aset7}
-              width={500}
-              height={500}
-              className="w-4/5"
-            />
-            <Image
-              alt="image"
-              src={Aset8}
-              width={500}
-              height={500}
-              className="w-2/3"
-            />
-            <Image
-              alt="image"
-              onClick={handleHidePayment}
-              src={Aset9}
-              width={500}
-              height={500}
+            <motion.div variants={childAnimated} className="w-4/5">
+              <Image alt="image" src={Aset7} width={500} height={500} />
+            </motion.div>
+            <motion.div variants={childAnimated} className="w-2/3">
+              <Image alt="image" src={Aset8} width={500} height={500} />
+            </motion.div>
+            <motion.div
+              variants={childAnimated}
               className="w-2/6 hover:cursor-pointer"
-            />
-            <div
+            >
+              <Image
+                alt="image"
+                onClick={handleHidePayment}
+                src={Aset9}
+                width={500}
+                height={500}
+              />
+            </motion.div>
+
+            <motion.div
+              variants={childAnimated}
               className={`p-3 w-full ${
                 hidePayment ? `h-0` : `h-auto`
               } overflow-hidden transition-all duration-700 ease-in`}
             >
-              <div className="bg-white/50 rounded border shadow-sm p-6 max-w-sm w-full mx-auto">
+              <div className="bg-white/50 rounded border shadow-sm text-xs p-6 max-w-sm w-full mx-auto">
                 <div className="flex items-center gap-3">
                   <Image alt="image" src={bca} width={100} height={100} />
                   <div>
@@ -113,31 +143,35 @@ const WeedingGift = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <Image
-              alt="image"
-              src={"/Aset5/10.png"}
-              width={300}
-              height={300}
-              className="w-3/5"
-            />
-            <Image
-              alt="image"
-              src={"/Aset5/11.png"}
-              width={300}
-              height={300}
-              className="w-2/3"
-            />
-            <Image
-              alt="image"
-              src={"/Aset5/12.png"}
-              width={300}
-              height={300}
-              className="w-1/4"
-            />
+            </motion.div>
+
+            <motion.div variants={childAnimated} className="w-3/5">
+              <Image
+                alt="image"
+                src={"/Aset5/10.png"}
+                width={300}
+                height={300}
+              />
+            </motion.div>
+            <motion.div variants={childAnimated} className="w-2/3">
+              <Image
+                alt="image"
+                src={"/Aset5/11.png"}
+                width={300}
+                height={300}
+              />
+            </motion.div>
+            <motion.div variants={childAnimated} className="w-1/4">
+              <Image
+                alt="image"
+                src={"/Aset5/12.png"}
+                width={300}
+                height={300}
+              />
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Templates>
   );
 };
