@@ -1,8 +1,39 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import LandingPageTemplate from "../templates/LandingPage/LandingPageTemplate";
+import { useEffect, useState } from "react";
 
 const Index: NextPage = () => {
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+
+  useEffect(() => {
+    const newAudio = new Audio("/songs.mp3");
+    newAudio.preload = "auto";
+    newAudio.onloadeddata = () => {
+      setAudio(newAudio);
+    };
+    return () => {
+      if (audio) {
+        audio.pause();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (audio) {
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  }, [audio, isPlaying]);
+
+  const toggleAudio = () => {
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <>
       <Head>

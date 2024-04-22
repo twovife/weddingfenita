@@ -12,36 +12,6 @@ import { motion } from "framer-motion";
 const LandingPageTemplate = () => {
   const [hideCover, setHideCover] = useState<boolean>(false);
 
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-
-  useEffect(() => {
-    const newAudio = new Audio("/songs.mp3");
-    newAudio.preload = "auto";
-    newAudio.onloadeddata = () => {
-      setAudio(newAudio);
-    };
-    return () => {
-      if (audio) {
-        audio.pause();
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (audio) {
-      if (isPlaying) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-  }, [audio, isPlaying]);
-
-  const toggleAudio = () => {
-    setIsPlaying(!isPlaying);
-  };
-
   return (
     <div className="antialiased relative z-10 w-full h-screen">
       <motion.div className="max-w-lg mx-auto">
