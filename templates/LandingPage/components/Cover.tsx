@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
+import { useRouter } from "next/router";
+
 interface CoverProps {
   hideCover: any;
   setHideCover: any;
@@ -12,6 +14,9 @@ const Cover: React.FC<CoverProps> = ({
   setHideCover,
   setIsPlaying,
 }) => {
+  const router = useRouter();
+  const toParam = router.query?.to;
+
   const handleOpenCover = () => {
     setHideCover(!hideCover);
     setIsPlaying(true);
@@ -78,6 +83,10 @@ const Cover: React.FC<CoverProps> = ({
                 alt="foto-bunga06"
                 className="w-3/4 -translate-y-1/3"
               />
+              <div className="text-lg  text-white mb-3 text-center">
+                <div className="font-semibold">Kepada Yth</div>
+                <div>{toParam ?? `My Best Friend`}</div>
+              </div>
               <button
                 onClick={handleOpenCover}
                 className="text-xl text-black px-5 py-2 rounded-lg font-semibold bg-white uppercase"

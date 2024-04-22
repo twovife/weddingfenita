@@ -9,21 +9,6 @@ import MempelaiWanita from "./components/MempelaiWanita";
 import MempelaiPria from "./components/MempelaiPria";
 import { motion } from "framer-motion";
 
-const singleAnimation = {
-  hide: { opacity: 0, y: "100%" },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      bounce: 0.4,
-      duration: 1,
-      stiffness: 100,
-      damping: 25,
-    },
-  },
-};
-
 const container = {
   hide: { opacity: 0 },
   show: {
